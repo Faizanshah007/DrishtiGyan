@@ -1,0 +1,9 @@
+Grammarly.js:2 [DEFAULT]: WARN : Using DEFAULT root logger
+t.printToConsole @ Grammarly.js:2
+VM10 webgazer.js:10423 initializing webgazer
+VM10 webgazer.js:9643 Uncaught DOMException: Failed to construct 'ImageData': The input data has zero elements.
+    at webgazer.reg.RidgeReg.setData (http://localhost/webgazer.js:9643:39)
+    at loadGlobalData (http://localhost/webgazer.js:10845:23)
+    at Object.webgazer.begin (http://localhost/webgazer.js:11004:9)
+    at http://localhost/try.html:18:11
+try.html:1 Unchecked runtime.lastError: The message port closed before a response was received.
