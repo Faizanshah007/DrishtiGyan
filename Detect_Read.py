@@ -3,8 +3,9 @@ import win32gui
 import time
 
 while True:
-    if (win32gui.GetWindowText(win32gui.GetForegroundWindow()).find(".pdf") != -1):
-        print("Good")
+    
+    if ((win32gui.GetWindowText(win32gui.GetForegroundWindow()).find("[~]") != -1)):
+        print("Active")
+        break
     else:
-      print("bad")
-    time.sleep(0.1)
+      print("Un-Active")
