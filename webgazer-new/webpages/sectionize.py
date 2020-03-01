@@ -1,19 +1,44 @@
-import selenium
-import re
+from selenium import webdriver
+import os
+import pyautogui
 
-webpage = "Nearly 50 per cent MPs in new Lok Sabha have criminal records.html"
-#webpage = "The plight of our education system.html"
-f = open(webpage,"r+",encoding="utf8")
+wd = webdriver.Chrome()
+wd.fullscreen_window() #Better view
+pyautogui.press(['tab','tab','tab','enter']) #Close the disclamer
+win_width, win_height = pyautogui.size()
+webpage = "9 Compelling Reasons Why Students Should Study Abroad.html"
+wd.get(os.path.join(os.getcwd(), webpage))
 
-content = f.read()
+with open("jquery.min.js","r") as jquery_js:
+    jquery = jquery_js.read()
+    wd.execute_script(jquery)
+    wd.execute_script('''$(document).ready(function () {
+        console.log(window.innerWidth, window.innerHeight);
+	var Hcount = 0;
+	var Pcount = 0;
+	$( "h1, h2, h3, h4, h5, h6, p" ).each(function( index ) {
+	if($(this).is("p"))
+	{++Pcount;
+	var temp_str = ("<label class = 'word'>" + $( this ).text().replace(new RegExp(" ", "g"), "</label> <label class = 'word'>") + "</label>");
+	$( this ).text('');
+	$(temp_str).appendTo($( this ));
+	$( this ).attr('id', 'para'+Hcount+'-'+Pcount);
+	$( this ).attr('class', 'paragraph');
+	$( this ).attr('style', 'border:1px solid black;padding:5px;');
+	}
+	else{
+	++Hcount;
+	Pcount = 0;
+	var temp_str = ("<label class = 'word'>" + $( this ).text().replace(new RegExp(" ", "g"), "</label> <label class = 'word'>") + "</label>");
+	$( this ).text('');
+	$(temp_str).appendTo($( this ));
+	$( this ).attr('id', 'head'+Hcount);
+	$( this ).attr('class', 'heading');
+	$( this ).attr('style', 'border:1px solid blue;padding:5px;');}
+        });
 
-subst1 = re.subn("<p>", '<p class="textborder" style="border:1px solid black;padding:5px;">', content)[0]
-
-subst2 = re.subn(r'<h(\d)>', r'<h\1 class = "headingborder" style="border:1px solid blue;padding:5px;">', subst1)[0]
-
-final = subst2
-
-f.truncate(0)
-f.seek(0)
-f.write(final)
-f.close()
+        $(".word").mouseover(function() {
+            //console.log( $( this ).text(), $( this ).parent().attr('id'));
+            console.log(document.elementFromPoint(460, 126));
+        });
+    });''')
