@@ -1,11 +1,47 @@
 from selenium import webdriver
 import os
 import pyautogui
+import pygetwindow as gw
+import pythoncom, pyHook
+import threading
 
+
+unlock = (False, False)
+def uMad_mouse(event):
+    global unlock
+    return unlock[0]
+
+def uMad_keyboard(event):
+    global unlock
+    return unlock[1]
+
+def main_pyhook():
+    hm = pyHook.HookManager()
+    hm.MouseAll = uMad_mouse
+    hm.KeyAll = uMad_keyboard
+    hm.HookMouse()
+    hm.HookKeyboard()
+    pythoncom.PumpMessages()
+    
+threading.Thread(target = main_pyhook).start()
 wd = webdriver.Chrome()
+
+pyautogui.FAILSAFE = False
+
+mywindow = gw.getWindowsWithTitle('data:, ')[0]
+mywindow_hWnd = mywindow._hWnd
+
+mywindow.activate()
+
+unlock = (False, True)
+
+pyautogui.press('tab',presses=3)
+pyautogui.press('enter')
+
+unlock = (True, True)
+
 wd.fullscreen_window() #Better view
-pyautogui.press(['tab','tab','tab','enter']) #Close the disclamer
-win_width, win_height = pyautogui.size()
+
 webpage = "9 Compelling Reasons Why Students Should Study Abroad.html"
 wd.get(os.path.join(os.getcwd(), webpage))
 
@@ -38,7 +74,8 @@ with open("jquery.min.js","r") as jquery_js:
         });
 
         $(".word").mouseover(function() {
-            //console.log( $( this ).text(), $( this ).parent().attr('id'));
-            console.log(document.elementFromPoint(460, 126));
+            console.log( $( this ).text(), $( this ).parent().attr('id'));
+            //console.log(document.elementFromPoint(460, 126));
         });
     });''')
+pyautogui.moveTo(0,0)
