@@ -74,7 +74,7 @@ with open("jquery.min.js","r") as jquery_js:
         });
 
         $(".word").mouseover(function() {
-            console.log( $( this ).text(), $( this ).parent().attr('id'));
+            console.log( $( this ).text(), $( this ).parent().attr('id'), Date.now());
             //console.log(document.elementFromPoint(460, 126));
         });
     });''')
