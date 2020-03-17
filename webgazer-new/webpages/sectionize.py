@@ -18,6 +18,7 @@ def uMad_keyboard(event):
 def main_pyhook():
     hm = pyHook.HookManager()
     hm.MouseAll = uMad_mouse
+    pyautogui.press('esc')  # Close any open system tray object
     hm.KeyAll = uMad_keyboard
     hm.HookMouse()
     hm.HookKeyboard()
@@ -42,7 +43,7 @@ unlock = (True, True)
 
 wd.fullscreen_window() #Better view
 
-webpage = "9 Compelling Reasons Why Students Should Study Abroad.html"
+webpage = "9 Compelling Reasons Why Students Should Study Abroad[~].html"
 wd.get(os.path.join(os.getcwd(), webpage))
 
 with open("jquery.min.js","r") as jquery_js:
