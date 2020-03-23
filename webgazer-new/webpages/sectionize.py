@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import os, time
+#import os
 import pyautogui
 import pygetwindow as gw
 import pythoncom, PyHook3
