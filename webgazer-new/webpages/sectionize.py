@@ -10,11 +10,11 @@ import threading
 unlock = (False, False)
 def uMad_mouse(event):
     global unlock
-    return unlock[0]
+    return True#unlock[0]
 
 def uMad_keyboard(event):
     global unlock
-    return unlock[1]
+    return True#unlock[1]
 
 def main_PyHook3():
     hm = PyHook3.HookManager()
@@ -42,10 +42,11 @@ mywindow.activate()
 unlock = (False, True)
 pyautogui.press('tab',presses=3)
 pyautogui.press('enter')
+pyautogui.press('f11') #fullscreen
 unlock = (False, False)
 
 
-wd.fullscreen_window() #Better view
+## wd.fullscreen_window() #Better view
 
 
 def run_mode():
@@ -90,8 +91,11 @@ def run_mode():
 
         function getGazedElement(x,y)
         {
-            var ele = document.elementFromPoint(x, y); 
-            console.log(ele.textContent, ele.parentNode.id, Date.now(), "- gaze");
+            var ele = document.elementFromPoint(x, y);
+            if(ele.className == "word")
+            {
+                console.log(ele.textContent, ele.parentNode.id, Date.now(), "- gaze");
+            }
         }
         
         }
@@ -241,4 +245,3 @@ while(not wd.execute_script("return window.go_to_main_page")):
     pass
 wd.get("http://localhost/webgazer-new/webpages/" + webpage + "?1")
 run_mode()
-
