@@ -10,11 +10,11 @@ import threading
 unlock = (False, False)
 def uMad_mouse(event):
     global unlock
-    return True#unlock[0]
+    return unlock[0]
 
 def uMad_keyboard(event):
     global unlock
-    return True#unlock[1]
+    return unlock[1]
 
 def main_PyHook3():
     hm = PyHook3.HookManager()
